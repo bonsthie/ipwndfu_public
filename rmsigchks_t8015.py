@@ -39,14 +39,14 @@ def makePTE_Table_16K(addr):
 
 
 def main():
-    print "*** SecureROM t8015 sigcheckpath by tihmstar ***"
+    print ("*** SecureROM t8015 sigcheckpath by tihmstar ***")
     device = dfu.acquire_device()
-    print "Found:", device.serial_number
+    print ("Found:", device.serial_number)
     if not "PWND:[" in device.serial_number:
-        print "Please enable pwned DFU Mode first."
+        print ("Please enable pwned DFU Mode first.")
         sys.exit(1)
     if not "PWND:[checkm8]" in device.serial_number:
-        print "Only devices pwned using checkm8 are supported."
+        print ("Only devices pwned using checkm8 are supported.")
         sys.exit(1)
     dfu.release_device(device)
 
@@ -97,7 +97,7 @@ def main():
         dfu.release_device(device)
     except:
         pass
-    print "Device is now ready to accept unsigned images"
+    print ("Device is now ready to accept unsigned images")
 
 
 if __name__ == "__main__":

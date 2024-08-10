@@ -299,7 +299,7 @@ class Endpoint(object):
     >>> for cfg in dev:
     >>>     for i in cfg:
     >>>         for e in i:
-    >>>             print e.bEndpointAddress
+    >>>             print (e.bEndpointAddress)
     """
 
     def __init__(self, device, endpoint, interface = 0,
@@ -428,7 +428,7 @@ class Interface(object):
     >>> dev = usb.core.find()
     >>> for cfg in dev:
     >>>     for i in cfg:
-    >>>         print i.bInterfaceNumber
+    >>>         print (i.bInterfaceNumber)
     """
 
     def __init__(self, device, interface = 0,
@@ -564,7 +564,7 @@ class Configuration(object):
     >>> import usb.core
     >>> dev = usb.core.find()
     >>> for cfg in dev:
-    >>>     print cfg.bConfigurationValue
+    >>>     print (cfg.bConfigurationValue)
     """
 
     def __init__(self, device, configuration = 0):
@@ -1193,7 +1193,7 @@ def find(find_all=False, backend = None, custom_match = None, **args):
     If no matching device is found, it will return an empty iterator. Example:
 
     for printer in find(find_all=True, bDeviceClass=7):
-        print (printer)
+        print ((printer))
 
     This call will get all the USB printers connected to the system.  (actually
     may be not, because some devices put their class information in the
@@ -1215,7 +1215,7 @@ def find(find_all=False, backend = None, custom_match = None, **args):
                 return True
 
     for printer in find(find_all=True, custom_match = is_printer):
-        print (printer)
+        print ((printer))
 
     Now even if the device class code is in the interface descriptor the
     printer will be found.

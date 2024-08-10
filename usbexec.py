@@ -118,7 +118,7 @@ class PwnedUSBDevice():
       elif isinstance(args[i], basestring) and i == len(args) - 1:
         cmd += args[i]
       else:
-        print 'ERROR: usbexec.execute: invalid argument at position %s' % i
+        print ('ERROR: usbexec.execute: invalid argument at position %s' % i)
         sys.exit(1)
       if i == 0 and self.platform.arch != 'arm64':
         cmd += '\0' * 4
@@ -140,8 +140,8 @@ class PwnedUSBDevice():
         self.platform = dp
         break
     if self.platform is None:
-      print self.serial_number
-      print 'ERROR: No matching usbexec.platform found for this device.'
+      print (self.serial_number)
+      print ('ERROR: No matching usbexec.platform found for this device.')
       sys.exit(1)
 
     info = self.read_memory(self.image_base() + 0x200, 0x100)
@@ -150,6 +150,6 @@ class PwnedUSBDevice():
         self.config = config
         break
     if self.config is None:
-      print info
-      print 'ERROR: No matching usbexec.config found for this image.'
+      print (info)
+      print ('ERROR: No matching usbexec.config found for this image.')
       sys.exit(1)

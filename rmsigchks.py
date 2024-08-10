@@ -50,42 +50,42 @@ def exploit_config(serial_number):
             return config
     for config in all_exploit_configs():
         if "CPID:%s" % config.cpid in serial_number:
-            print "ERROR: CPID is compatible, but serial number string does not match."
-            print "Make sure device is in SecureROM DFU Mode and not LLB/iBSS DFU Mode. Exiting."
+            print ("ERROR: CPID is compatible, but serial number string does not match.")
+            print ("Make sure device is in SecureROM DFU Mode and not LLB/iBSS DFU Mode. Exiting.")
             sys.exit(1)
-    print "ERROR: This is not a compatible device. Exiting."
-    print "Right now, only the iPhone 5s is compatible."
+    print ("ERROR: This is not a compatible device. Exiting.")
+    print ("Right now, only the iPhone 5s is compatible.")
     sys.exit(1)
 
 def main():
-    print "*** SecureROM Signature check remover by Linus Henze ***"
+    print ("*** SecureROM Signature check remover by Linus Henze ***")
     device = dfu.acquire_device()
-    print "Found:", device.serial_number
+    print ("Found:", device.serial_number)
     if not "PWND:[" in device.serial_number:
-        print "Please enable pwned DFU Mode first."
+        print ("Please enable pwned DFU Mode first.")
         sys.exit(1)
     if not "PWND:[checkm8]" in device.serial_number:
-        print "Only devices pwned using checkm8 are supported."
+        print ("Only devices pwned using checkm8 are supported.")
         sys.exit(1)
     config = exploit_config(device.serial_number)
-    print "Applying patches..."
+    print ("Applying patches...")
     try:
         pdev = usbexec.PwnedUSBDevice()
     except usb.core.USBError:
-        print "Patches have already been applied. Exiting."
+        print ("Patches have already been applied. Exiting.")
         sys.exit(0)
     for k in config.patches.keys():
         pdev.write_memory(k, config.patches[k])
-    print "Successfully applied patches"
-    print "Resetting device state"
-    print "* This will effectiveley disable pwned DFU Mode"
-    print "* Only the signature patches will remain"
+    print ("Successfully applied patches")
+    print ("Resetting device state")
+    print ("* This will effectiveley disable pwned DFU Mode")
+    print ("* Only the signature patches will remain")
     # Send abort
     device.ctrl_transfer(HOST2DEVICE, DFU_ABORT, 0, 0, 0, 0)
     # Perform USB reset
     dfu.usb_reset(device)
     dfu.release_device(device)
-    print "Device is now ready to accept unsigned images"
+    print ("Device is now ready to accept unsigned images")
 
 if __name__ == "__main__":
 	main()
