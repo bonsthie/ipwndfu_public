@@ -17,7 +17,7 @@ def exploit():
     print ('*** based on SHAtter exploit (segment overflow) by posixninja and pod2g ***')
 
     device = dfu.acquire_device()
-    print(('Found:', device.serial_number))
+    print ('Found:', device.serial_number)
 
     if 'PWND:[' in device.serial_number:
         print ('Device is already in pwned DFU Mode. Not executing exploit.')

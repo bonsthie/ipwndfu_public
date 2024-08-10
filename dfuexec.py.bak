@@ -158,7 +158,7 @@ class PwnedDFUDevice():
 
     def aes(self, data, action, key):
         if len(data) % AES_BLOCK_SIZE != 0:
-            print(('ERROR: Length of data for AES encryption/decryption must be a multiple of %s.' % AES_BLOCK_SIZE))
+            print ('ERROR: Length of data for AES encryption/decryption must be a multiple of %s.' % AES_BLOCK_SIZE)
             sys.exit(1)
 
         cmd = struct.pack('<8I', self.config.aes_crypto_cmd, action, self.config.load_address + 36, self.config.load_address + 0x8, len(data), key, 0, 0)
@@ -167,7 +167,7 @@ class PwnedDFUDevice():
 
     def aes_hex(self, hexdata, action, key):
         if len(hexdata) % 32 != 0:
-            print(('ERROR: Length of hex data for AES encryption/decryption must be a multiple of %s.' % (2 * AES_BLOCK_SIZE)))
+            print ('ERROR: Length of hex data for AES encryption/decryption must be a multiple of %s.' % (2 * AES_BLOCK_SIZE))
             sys.exit(1)
 
         return binascii.hexlify(self.aes(binascii.unhexlify(hexdata), action, key))
@@ -196,7 +196,7 @@ class PwnedDFUDevice():
         NOR_PARTS = 8
         nor = str()
         for i in range(NOR_PARTS):
-            print(('Dumping NOR, part %s/%s.' % (i+1, NOR_PARTS)))
+            print ('Dumping NOR, part %s/%s.' % (i+1, NOR_PARTS))
             (retval, received) = self.execute(struct.pack('<6I', read, bdev, self.config.load_address + 8, i * NOR_PART_SIZE, 0, NOR_PART_SIZE), NOR_PART_SIZE)
             nor += received
 
@@ -206,7 +206,7 @@ class PwnedDFUDevice():
             f = open(filename, 'wb')
             f.write(nor)
             f.close()
-            print(('NOR backed up to file: %s' % filename))
+            print ('NOR backed up to file: %s' % filename)
 
         return nor
 

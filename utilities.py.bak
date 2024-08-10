@@ -21,7 +21,7 @@ def aes_decrypt(data, iv, key):
   (stdout, stderr) = p.communicate(input=data)
 
   if p.returncode != 0 or len(stderr) > 0:
-    print(('ERROR: openssl failed: %s' % stderr))
+    print ('ERROR: openssl failed: %s' % stderr)
     sys.exit(1)
 
   return stdout
@@ -31,7 +31,7 @@ def hex_dump(data, address):
   (stdout, stderr) = p.communicate(input=data)
 
   if p.returncode != 0 or len(stderr) > 0:
-    print(('ERROR: xxd failed: %s' % stderr))
+    print ('ERROR: xxd failed: %s' % stderr)
     sys.exit(1)
 
   return stdout

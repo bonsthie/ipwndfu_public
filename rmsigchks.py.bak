@@ -60,7 +60,7 @@ def exploit_config(serial_number):
 def main():
     print ("*** SecureROM Signature check remover by Linus Henze ***")
     device = dfu.acquire_device()
-    print(("Found:", device.serial_number))
+    print ("Found:", device.serial_number)
     if not "PWND:[" in device.serial_number:
         print ("Please enable pwned DFU Mode first.")
         sys.exit(1)
@@ -74,7 +74,7 @@ def main():
     except usb.core.USBError:
         print ("Patches have already been applied. Exiting.")
         sys.exit(0)
-    for k in list(config.patches.keys()):
+    for k in config.patches.keys():
         pdev.write_memory(k, config.patches[k])
     print ("Successfully applied patches")
     print ("Resetting device state")

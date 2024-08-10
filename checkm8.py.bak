@@ -100,7 +100,7 @@ def prepare_shellcode(name, constants=[]):
     fmt = '<%sQ'
     size = 8
   else:
-    print(('ERROR: Shellcode name "%s" does not end with known architecture. Exiting.' % name))
+    print ('ERROR: Shellcode name "%s" does not end with known architecture. Exiting.' % name)
     sys.exit(1)
 
   with open('bin/%s.bin' % name, 'rb') as f:
@@ -477,7 +477,7 @@ def exploit():
 
   device = dfu.acquire_device()
   start = time.time()
-  print(('Found:', device.serial_number))
+  print ('Found:', device.serial_number)
   if 'PWND:[' in device.serial_number:
     print ('Device is already in pwned DFU Mode. Not executing exploit.')
     return
@@ -526,5 +526,5 @@ def exploit():
     print ('ERROR: Exploit failed. Device did not enter pwned DFU Mode.')
     sys.exit(1)
   print ('Device is now in pwned DFU Mode.')
-  print(('(%0.2f seconds)' % (time.time() - start)))
+  print ('(%0.2f seconds)' % (time.time() - start))
   dfu.release_device(device)

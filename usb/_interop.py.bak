@@ -65,7 +65,7 @@ def _next(iter):
     try:
         return next(iter)
     except NameError:
-        return next(iter)
+        return iter.next()
 
 # functools appeared in 2.5
 try:

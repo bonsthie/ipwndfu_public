@@ -41,7 +41,7 @@ def makePTE_Table_16K(addr):
 def main():
     print ("*** SecureROM t8015 sigcheckpath by tihmstar ***")
     device = dfu.acquire_device()
-    print(("Found:", device.serial_number))
+    print ("Found:", device.serial_number)
     if not "PWND:[" in device.serial_number:
         print ("Please enable pwned DFU Mode first.")
         sys.exit(1)
